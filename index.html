@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MediNexo · Red B2B de insumos médicos</title>
+  <meta name="description" content="Prototipo de plataforma B2B para el intercambio de insumos médicos entre instituciones de salud de Ecuador.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231F2F46'/%3E%3Cpath d='M16 8v16M8 16h16' stroke='white' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: {
+          navy: { DEFAULT: '#1F2F46', 2: '#2A3F5F' },
+          brand: { DEFAULT: '#2F5D8C', dark: '#244B72' },
+          clay: { DEFAULT: '#D08A57', dark: '#9A5527' },
+          accent: '#9DB7D5', sky: '#E9EEF4', ink: '#1B2430', muted: '#5F6B7A', line: '#E2DED5',
+          ok: '#2E7D5B', warn: '#B7791F', bad: '#B3382C', info: '#3A6EA5', app: '#F6F3EE'
+        },
+        fontFamily: { sans: ['Inter', 'Segoe UI', 'system-ui', 'sans-serif'] }
+      } }
+    };
+  </script>
+  <style type="text/tailwindcss">
+    @layer components {
+      .btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/50 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap; }
+      .btn-primary { @apply bg-brand text-white hover:bg-brand-dark; }
+      .btn-accent { @apply bg-clay text-navy font-semibold hover:bg-white; }
+      .btn-outline { @apply bg-white text-ink border border-line hover:bg-sky hover:border-brand/30; }
+      .btn-ghost { @apply text-brand hover:bg-sky; }
+      .btn-danger { @apply bg-bad text-white hover:bg-red-800; }
+      .btn-sm { @apply px-2.5 py-1.5 text-xs; }
+      .card { @apply bg-white rounded-xl border border-line; }
+      .badge { @apply inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[11px] font-medium ring-1 ring-inset whitespace-nowrap; }
+      .input { @apply w-full rounded-lg border border-line bg-white px-3 py-2 text-sm text-ink placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand; }
+      .lbl { @apply block text-xs font-medium text-muted mb-1; }
+      .th { @apply px-4 py-3 text-left text-[11px] font-semibold uppercase tracking-wide text-muted bg-app whitespace-nowrap; }
+      .td { @apply px-4 py-3.5 text-sm align-middle border-t border-line; }
+      .chip { @apply inline-flex items-center gap-2 rounded-full border border-line bg-white px-4 py-2 text-sm font-medium text-muted hover:border-brand/40 hover:text-brand transition cursor-pointer; }
+      .chip-on { @apply bg-navy text-white border-navy hover:text-white hover:border-navy; }
+      .navtab { @apply relative inline-flex items-center gap-2 px-4 h-16 text-sm font-medium text-slate-300 hover:text-white transition whitespace-nowrap; }
+      .navtab-on { @apply text-white; }
+    }
+    .navtab-on::after { content: ''; position: absolute; left: 1rem; right: 1rem; bottom: 0; height: 3px; border-radius: 3px 3px 0 0; background: #D08A57; }
+    .hero { background-color: #1F2F46; background-image: radial-gradient(rgba(255,255,255,.07) 1px, transparent 1px); background-size: 18px 18px; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', 'Segoe UI', system-ui, sans-serif; -webkit-font-smoothing: antialiased; font-variant-numeric: tabular-nums; }
+    .fade-in { animation: fade .2s ease both; }
+    @keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+    ::-webkit-scrollbar { width: 10px; height: 10px; } ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 8px; border: 2px solid transparent; background-clip: content-box; }
+  </style>
+</head>
+<body class="bg-app text-ink min-h-screen">
+
+  <!-- ================= INGRESO / SELECCIÓN DE PERFIL ================= -->
+  <section id="login" class="min-h-screen grid lg:grid-cols-[1fr_1.15fr]">
+    <div class="hero text-white p-8 lg:p-14 flex flex-col justify-between">
+      <div>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-lg bg-white/10 ring-1 ring-white/20 grid place-items-center"><svg viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="white" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
+          <div class="text-2xl font-bold tracking-tight">MediNexo</div>
+        </div>
+        <div class="mt-14 text-xs font-semibold tracking-widest uppercase text-clay">Red B2B de insumos médicos</div>
+        <h1 class="mt-3 text-3xl lg:text-5xl font-bold leading-[1.1] tracking-tight">Lo que a una clínica le sobra, otra lo necesita.</h1>
+        <p class="mt-5 text-slate-300 max-w-lg leading-relaxed">Publica excedentes antes de que caduquen y consigue reactivos, medicamentos y repuestos críticos en horas, con instituciones verificadas y trazabilidad por lote.</p>
+      </div>
+      <div class="mt-12 pt-6 border-t border-white/15 text-xs text-slate-400">Prototipo académico · Sistemas de Información · Ecuador</div>
+    </div>
+
+    <div class="p-6 lg:p-14 flex flex-col justify-center">
+      <div class="max-w-xl w-full mx-auto">
+        <span class="badge bg-sky text-brand-dark ring-brand/20">Prototipo navegable · datos de ejemplo</span>
+        <h2 class="mt-3 text-2xl font-bold tracking-tight text-navy">¿Cómo quieres ingresar?</h2>
+        <p class="text-muted mt-2 text-sm">Elige un perfil. Podrás cambiarlo en cualquier momento desde el menú de tu cuenta.</p>
+        <div id="roleCards" class="mt-7 grid gap-3"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= APLICACIÓN ================= -->
+  <div id="app" class="hidden min-h-screen">
+    <header id="top" class="sticky top-0 z-30 bg-navy text-white"></header>
+    <main id="main" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 fade-in"></main>
+  </div>
+
+  <!-- Contenedores globales -->
+  <div id="modal" class="fixed inset-0 z-50 hidden items-start sm:items-center justify-center p-3 sm:p-6 bg-navy/60 overflow-y-auto" onclick="if(event.target===this)closeModal()"></div>
+  <div id="toasts" class="fixed bottom-4 right-4 z-[60] flex flex-col gap-2 items-end pointer-events-none"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
